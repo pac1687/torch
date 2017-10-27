@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 
-var questions = [
+const questions = [
   {
     type: 'input',
     name: 'search',
