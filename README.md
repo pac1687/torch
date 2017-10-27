@@ -12,7 +12,7 @@ Prerequisites:
 To run the project:
 
 * install all project dependencies with `npm install`
-* start the development server with `node app.js`
+* start the app with `node app.js`
 
 ### Author
 Justin Pacubas
