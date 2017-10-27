@@ -1,0 +1,15 @@
+{
+  "name": "webscraper",
+  "version": "1.0.0",
+  "description": "This web scraper will search Rotten Tomatoes and scrape the results.",
+  "main": "app.js",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Justin Pacubas",
+  "license": "ISC"
+}
