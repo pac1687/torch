@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const Horseman = require('node-horseman');
 
 const questions = [
   {
@@ -8,12 +9,30 @@ const questions = [
   }
 ];
 
-const URL = 'https://www.rottentomatoes.com';
+const URL = 'https://www.imdb.com';
 
-console.log('*** Welcome to the Rotten Tomatoes Web Scraper ***');
+console.log('*** Welcome to the IMDB Web Scraper ***');
 console.log('');
-console.log('This app will take an input search term and scrape the results from Rotten Tomatoes');
+console.log('This app will take an input search term and scrape the results from IMDB');
 
 inquirer.prompt(questions).then(answers => {
-  console.log('answers', answers)
+  const horseman = new Horseman();
+
+  horseman
+    .userAgent('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0')
+    .open(URL)
+    .type('input[name="q"]', answers.search)
+    .click('button[id="navbar-submit-button"]')
+    .waitForSelector('td[class="result_text"] > a')
+    .evaluate(function() {
+      const results = [];
+      $('td[class="result_text"] > a').each(function(item) {
+        const result = $(this).text();
+        results.push(result);
+      })
+      return results;
+    })
+    .then(function(results) {
+      return horseman.close();
+    });
 });
