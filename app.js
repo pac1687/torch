@@ -6,7 +6,7 @@ const questions = [
   {
     type: 'input',
     name: 'search',
-    message: 'What do you want to search Rotten Tomatoes for?'
+    message: 'What do you want to search IMDB for?'
   }
 ];
 
