@@ -27,6 +27,7 @@ inquirer.prompt(questions).then(answers => {
     .waitForSelector('td[class="result_text"] > a')
     .evaluate(function() {
       const results = [];
+
       $('td[class="result_text"] > a').each(function(item) {
         const result = $(this).text();
         results.push(result);
@@ -37,13 +38,14 @@ inquirer.prompt(questions).then(answers => {
       const dataToWrite = results.map(result => {
         return `"${result}"`
       }).join(",\n");
+
       fs.writeFile('imdbResults.csv', dataToWrite, 'utf8', (err) => {
         if (err) {
           console.log('Error occured while saving scraping results', err);
         } else {
           console.log('Results saved!');
         }
-      })
+      });
       return horseman.close();
     });
 });
