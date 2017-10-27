@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const Horseman = require('node-horseman');
+const fs = require('fs');
 
 const questions = [
   {
@@ -33,6 +34,16 @@ inquirer.prompt(questions).then(answers => {
       return results;
     })
     .then(function(results) {
+      const dataToWrite = results.map(result => {
+        return `"${result}"`
+      }).join(",\n");
+      fs.writeFile('imdbResults.csv', dataToWrite, 'utf8', (err) => {
+        if (err) {
+          console.log('Error occured while saving scraping results', err);
+        } else {
+          console.log('Results saved!');
+        }
+      })
       return horseman.close();
     });
 });
